@@ -2,6 +2,13 @@ package pages;
 
 import objectrepository.ObjectRepository;
 
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbookFactory;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,10 +22,16 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import base.Constants;
 //import org.slf4j.Logger;
 //import org.slf4j.LoggerFactory;
 import util.SeleniumUtils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
@@ -45,6 +58,15 @@ public class WalmartPhoneOrderPage {
     }
     
     public void walmartLogin() {
+    	XSSFWorkbook wb = null;
+//    	FileInputStream inFile = null;
+    	XSSFSheet sheet = null;
+    	XSSFRow row = null;
+    	XSSFCell cell0 = null;
+    	XSSFCell cell1 = null;
+    	String userName = null;
+    	String passWord = null;
+    	DataFormatter dataFormatter = new DataFormatter();
 //
 //	Login into the Walmart URL www.walmart.com.   	
 //
@@ -52,15 +74,28 @@ public class WalmartPhoneOrderPage {
 //    	logging in from automation code. You will need to stop execution
 //    	with a break point following the logInButton click line of code.
 //    	
-    	
+    	try {
+			wb = (XSSFWorkbook) XSSFWorkbookFactory.createWorkbook(new File(Constants.XLSX_INPUT_DIR + Constants.USERNAME_PASSWORD_XLSX), true);
+			sheet = wb.getSheetAt(0);
+			row = sheet.getRow(1);
+			cell0 = row.getCell(0);
+			cell1 = row.getCell(1);
+			userName = dataFormatter.formatCellValue(cell0);
+			passWord = dataFormatter.formatCellValue(cell1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	wait.until(ExpectedConditions.elementToBeClickable(ObjectRepository.accountDropDown));
     	ObjectRepository.accountDropDown.click();
     	wait.until(ExpectedConditions.elementToBeClickable(ObjectRepository.signIn));
     	ObjectRepository.signIn.click();
     	ObjectRepository.userId.clear();
-    	ObjectRepository.userId.sendKeys(properties.getProperty("UserID"));
-    	ObjectRepository.passWord.clear();
-    	ObjectRepository.passWord.sendKeys(properties.getProperty("UserPW"));
+//    	ObjectRepository.userId.sendKeys(properties.getProperty("UserID"));
+    	ObjectRepository.userId.sendKeys(userName);
+//    	ObjectRepository.passWord.clear();
+    	ObjectRepository.passWord.sendKeys(passWord);
+    	
     	ObjectRepository.logInButton.click();
 //
 //  Place the Login break point on the following line of code to stop for Captcha interruption:    	
@@ -79,7 +114,9 @@ public class WalmartPhoneOrderPage {
     	wait.until(ExpectedConditions.elementToBeClickable(ObjectRepository.accountEmailOption)); 
     	ObjectRepository.accountEmailOption.click();
         seleniumUtils.waitForPageLoad(driver, 500);   	
-        Assert.assertEquals(properties.getProperty("UserID"),ObjectRepository.accountEmail.getText());
+//        Assert.assertEquals(properties.getProperty("UserID"),ObjectRepository.accountEmail.getText());
+        Assert.assertEquals(userName,ObjectRepository.accountEmail.getText());
+
     }
     public void walmartPhonesLoad() {
 //

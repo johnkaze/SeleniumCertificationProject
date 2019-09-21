@@ -138,7 +138,7 @@ public class WalmartMobilePhonesPage {
         notEof = true;
     	while (notEof)
         {
-        	seleniumUtils.waitForPageLoad(driver, 1500);
+        	seleniumUtils.waitForPageLoad(driver, 3000);
 //        	pages = ObjectRepository.unorderedPages.findElements(By.tagName("a"));
 
 //    		status1 = seleniumUtils.waitForElementClickable(driver, pages.get(0));

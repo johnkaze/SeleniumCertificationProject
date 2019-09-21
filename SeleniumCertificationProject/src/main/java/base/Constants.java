@@ -15,6 +15,11 @@ public class Constants {
             .append(SEPARATOR).append("src").append(SEPARATOR).append("test").append(SEPARATOR)
             .append("resources").append(SEPARATOR).
                     append("driver").append(SEPARATOR).toString();
+
+    public static final String XLSX_INPUT_DIR = new StringBuilder(USER_DIR)
+    		.append(SEPARATOR).append("src").append(SEPARATOR).append("test").append(SEPARATOR)
+    		.append("resources").append(SEPARATOR)
+    		.append("testinput").append(SEPARATOR).toString();
     
     public static final String XLSX_DIR = new StringBuilder(USER_DIR)
     		.append(SEPARATOR).append("src").append(SEPARATOR).append("test").append(SEPARATOR)
@@ -42,5 +47,7 @@ public class Constants {
     public static final String VALUE = "value";
     
     public static final String MOBILE_PHONE_XLSX = "MobilePhones.xlsx";
+    public static final String USERNAME_PASSWORD_XLSX = "UserNamePassWord.xlsx";
+
 
 }
