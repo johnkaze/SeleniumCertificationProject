@@ -1,4 +1,0 @@
-
-mvn clean install -DsuiteXml=walmartmobilephones.xml
-
-mvn clean install -DsuiteXml=walmartphoneorder.xml
