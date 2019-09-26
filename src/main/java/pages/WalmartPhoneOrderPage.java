@@ -115,7 +115,7 @@ public class WalmartPhoneOrderPage {
     	wait.until(ExpectedConditions.elementToBeClickable(ObjectRepository.accountEmailOption)); 
     	ObjectRepository.accountEmailOption.click();
         seleniumUtils.waitForPageLoad(driver, 500);   	
-        Assert.assertEquals(properties.getProperty("UserID"),ObjectRepository.accountEmail.getText());
+        Assert.assertEquals(userName,ObjectRepository.accountEmail.getText());
     }
     public void walmartPhonesLoad() {
 //
