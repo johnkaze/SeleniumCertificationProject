@@ -93,7 +93,8 @@ public class WalmartPhoneOrderPage {
     	ObjectRepository.userId.clear();
 //    	ObjectRepository.userId.sendKeys(properties.getProperty("UserID"));
     	ObjectRepository.userId.sendKeys(userName);
-//    	ObjectRepository.passWord.clear();
+    	ObjectRepository.passWord.clear();
+//    	ObjectRepository.userId.sendKeys(properties.getProperty("UserPW"));
     	ObjectRepository.passWord.sendKeys(passWord);
     	
     	ObjectRepository.logInButton.click();
@@ -114,9 +115,7 @@ public class WalmartPhoneOrderPage {
     	wait.until(ExpectedConditions.elementToBeClickable(ObjectRepository.accountEmailOption)); 
     	ObjectRepository.accountEmailOption.click();
         seleniumUtils.waitForPageLoad(driver, 500);   	
-//        Assert.assertEquals(properties.getProperty("UserID"),ObjectRepository.accountEmail.getText());
-        Assert.assertEquals(userName,ObjectRepository.accountEmail.getText());
-
+        Assert.assertEquals(properties.getProperty("UserID"),ObjectRepository.accountEmail.getText());
     }
     public void walmartPhonesLoad() {
 //
@@ -138,7 +137,7 @@ public class WalmartPhoneOrderPage {
     	seleniumUtils.waitForPageLoad(driver, 1000);
 		
 //
-//	 	Add the first iPhone 6s plus displayed to the shopping cart after 	
+//	 	Add the second iPhone 6s plus displayed to the shopping cart after 	
 //		selecting the gray color.
 //
 		
